@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DebtCollectionPortal - Update Email</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .sidebar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 10px;
+        }
+        .btn-outline-primary {
+            border-color: #667eea;
+            color: #667eea;
+            border-radius: 10px;
+        }
+        .btn-outline-primary:hover {
+            background: #667eea;
+            border-color: #667eea;
+        }
+        .form-control {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            padding: 12px 15px;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        .current-email {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+        }
+        .email-verification {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 px-0">
+                <div class="sidebar">
+                    <div class="p-3">
+                        <h4 class="text-center mb-4">
+                            <i class="fas fa-shield-alt me-2"></i>
+                            DebtCollectionPortal
+                        </h4>
+                        <nav class="nav flex-column">
+                            <a class="nav-link" href="dashboard.html">
+                                <i class="fas fa-home me-2"></i>Dashboard
+                            </a>
+                            <a class="nav-link" href="update-address.html">
+                                <i class="fas fa-map-marker-alt me-2"></i>Update Address
+                            </a>
+                            <a class="nav-link active" href="update-email.html">
+                                <i class="fas fa-envelope me-2"></i>Update Email
+                            </a>
+                            <a class="nav-link" href="index.html">
+                                <i class="fas fa-sign-out-alt me-2"></i>Logout
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10">
+                <div class="p-4">
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h2 class="mb-1">
+                                <i class="fas fa-envelope me-2"></i>Update Email Address
+                            </h2>
+                            <p class="text-muted mb-0">Change your email address for account communications</p>
+                        </div>
+                        <a href="dashboard.html" class="btn btn-outline-primary">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+                        </a>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <!-- Current Email -->
+                            <div class="card mb-4">
+                                <div class="card-header bg-info text-white">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-envelope me-2"></i>Current Email Address
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="current-email">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-envelope fa-2x text-primary me-3"></i>
+                                            <div>
+                                                <h6 class="fw-bold mb-1">john.doe@email.com</h6>
+                                                <p class="text-muted mb-0">Primary email address</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Update Form -->
+                            <div class="card">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-edit me-2"></i>New Email Address
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="emailForm">
+                                        <div class="mb-4">
+                                            <label for="newEmail" class="form-label">New Email Address *</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                                <input type="email" class="form-control" id="newEmail" name="newEmail" 
+                                                       placeholder="Enter your new email address" required>
+                                            </div>
+                                            <div class="form-text">We'll send a verification email to this address</div>
+                                        </div>
+                                        
+                                        <div class="mb-4">
+                                            <label for="confirmEmail" class="form-label">Confirm New Email Address *</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                                <input type="email" class="form-control" id="confirmEmail" name="confirmEmail" 
+                                                       placeholder="Confirm your new email address" required>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-4">
+                                            <label for="currentPassword" class="form-label">Current Password *</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                                <input type="password" class="form-control" id="currentPassword" name="currentPassword" 
+                                                       placeholder="Enter your current password" required>
+                                            </div>
+                                            <div class="form-text">Required for security verification</div>
+                                        </div>
+                                        
+                                        <div class="mb-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="confirmEmailChange" required>
+                                                <label class="form-check-label" for="confirmEmailChange">
+                                                    I understand that changing my email address will require verification and may affect my account access
+                                                </label>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="d-flex gap-2">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fas fa-save me-2"></i>Update Email Address
+                                            </button>
+                                            <button type="button" class="btn btn-outline-secondary" onclick="resetForm()">
+                                                <i class="fas fa-undo me-2"></i>Reset
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                            <!-- Email Verification Process -->
+                            <div class="card mt-4">
+                                <div class="card-header bg-success text-white">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-shield-alt me-2"></i>Email Verification Process
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4 text-center mb-3">
+                                            <div class="email-verification">
+                                                <i class="fas fa-paper-plane fa-2x mb-2"></i>
+                                                <h6>1. Send Verification</h6>
+                                                <small>We'll send a verification link to your new email</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 text-center mb-3">
+                                            <div class="email-verification">
+                                                <i class="fas fa-envelope-open fa-2x mb-2"></i>
+                                                <h6>2. Check Email</h6>
+                                                <small>Click the verification link in your inbox</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 text-center mb-3">
+                                            <div class="email-verification">
+                                                <i class="fas fa-check-circle fa-2x mb-2"></i>
+                                                <h6>3. Complete Update</h6>
+                                                <small>Your email address will be updated</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <!-- Security Information -->
+                            <div class="card">
+                                <div class="card-header bg-warning text-dark">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-shield-alt me-2"></i>Security Information
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-2">
+                                            <i class="fas fa-lock text-success me-2"></i>
+                                            Password verification required
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-envelope text-info me-2"></i>
+                                            Verification email sent to new address
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-clock text-warning me-2"></i>
+                                            Changes take effect after verification
+                                        </li>
+                                        <li class="mb-0">
+                                            <i class="fas fa-bell text-primary me-2"></i>
+                                            Notification sent to old email
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- API Information -->
+                            <div class="card mt-3">
+                                <div class="card-header bg-dark text-white">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-code me-2"></i>API Information
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <small class="text-muted">
+                                        <strong>Endpoint:</strong><br>
+                                        PUT /api/account/{accountId}/email<br><br>
+                                        <strong>Required Fields:</strong><br>
+                                        • email (new email address)<br><br>
+                                        <strong>Authentication:</strong><br>
+                                        • API Key required<br>
+                                        • User session validation
+                                    </small>
+                                </div>
+                            </div>
+                            
+                            <!-- Help Card -->
+                            <div class="card mt-3">
+                                <div class="card-header bg-info text-white">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-question-circle me-2"></i>Need Help?
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="mb-2">If you don't receive the verification email:</p>
+                                    <ul class="list-unstyled small">
+                                        <li class="mb-1">• Check your spam folder</li>
+                                        <li class="mb-1">• Wait 5-10 minutes</li>
+                                        <li class="mb-1">• Contact support if needed</li>
+                                    </ul>
+                                    <button class="btn btn-outline-info btn-sm">
+                                        <i class="fas fa-phone me-1"></i>Contact Support
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const API_KEY = 'YOUR_API_KEY_HERE';
+
+        const hdr = () => {
+            const t = localStorage.getItem('authToken');
+            return t
+                ? { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + t }
+                : { 'Content-Type': 'application/json', 'X-API-Key': API_KEY };
+        };
+
+        const j = async (r) => {
+            try {
+                return await r.json();
+            } catch {
+                return { status: r.status };
+            }
+        };
+
+        document.getElementById('emailForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const newEmail = document.getElementById('newEmail').value;
+            const confirmEmail = document.getElementById('confirmEmail').value;
+            const currentPassword = document.getElementById('currentPassword').value;
+
+            if (newEmail !== confirmEmail) {
+                alert('Email addresses do not match!');
+                return;
+            }
+
+            const accountId = localStorage.getItem('accountId');
+            if (!accountId) {
+                alert('AccountId not found. Please login first.');
+                location.href = 'index.html';
+                return;
+            }
+
+            try {
+                const res = await fetch(`/api/account/${encodeURIComponent(accountId)}/email`, {
+                    method: 'PUT',
+                    headers: hdr(),
+                    body: JSON.stringify({ email: newEmail, password: currentPassword })
+                });
+
+                if (!res.ok) {
+                    const err = await j(res);
+                    alert('Failed to update email: ' + (err.message || res.status));
+                    return;
+                }
+
+                alert('Email update requested. Check your new email for verification.');
+                location.href = 'dashboard.html';
+            } catch {
+                alert('Network error while updating email');
+            }
+        });
+
+        function resetForm() {
+            document.getElementById('emailForm').reset();
+        }
+
+        document.getElementById('confirmEmail').addEventListener('input', function () {
+            this.setCustomValidity(this.value && document.getElementById('newEmail').value !== this.value ? 'Email addresses do not match' : '');
+        });
+    </script>
+</body>
+</html>
