@@ -78,9 +78,4 @@ app.MapControllers();
  
 app.MapFallbackToFile("index.html");
 
-Console.WriteLine("🚀 DebtCollectionPortal Frontend started!");
-Console.WriteLine("📊 Frontend: https://localhost:5001");
-Console.WriteLine("🔌 External API: Configure with ExternalApi:BaseUrl");
-Console.WriteLine("📚 Configure API settings in appsettings.json or environment variables");
-
 app.Run();
